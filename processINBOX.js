@@ -3,6 +3,27 @@
 
 // process drafts from INBOX
 
+// ----------------------------------------------------
+// START OF USER DEFINITIONS
+
+// declare "display names" (for the prompt) and "action names" (from your Actions) in an array:
+// the last pair does not need a "," after the [] brackets!s
+let actionArray = [
+    ['skip', ''],
+    ['✅ 单个任务发到滴答', 'Task in TickTick (Content)'],
+    ['❇️ 多个任务发到滴答', 'Task in TickTick (Multi)'],
+    ['☑️ Send to todoist', 'Todoist Quick Add V3 - With Notes, Reminders, and default project'],
+    ['💎 记录发到 obsidian', '→ Obsidian file dnp'],
+    ['⚡️ 想法发到 flomo', 'Send to flomo'],
+    ['🗑 删除', 'trash']
+    //   ['', ''],
+    //   ['', ''],
+    //   ['', ''],
+];
+
+// END OF USER DEFINITIONS
+// ----------------------------------------------------
+
 // select from a list of workspace
 // code from https://actions.getdrafts.com/a/1SG
 let workspaces = Workspace.getAll();
@@ -27,27 +48,6 @@ if (!p.show()) {
 
 let selectedIndex = p.buttonPressed;
 let inboxWorkspace = workspaces[selectedIndex];
-
-// ----------------------------------------------------
-// START OF USER DEFINITIONS
-
-// declare "display names" (for the prompt) and "action names" (from your Actions) in an array:
-// the last pair does not need a "," after the [] brackets!s
-let actionArray = [
-    ['skip', ''],
-    ['✅ 单个任务发到滴答', 'Task in TickTick (Content)'],
-    ['❇️ 多个任务发到滴答', 'Task in TickTick (Multi)'],
-    ['☑️ Send to todoist', 'Todoist Quick Add V3 - With Notes, Reminders, and default project'],
-    ['💎 记录发到 obsidian', '→ Obsidian file dnp'],
-    ['⚡️ 想法发到 flomo', 'Send to flomo'],
-    ['🗑 删除', 'trash']
-    //   ['', ''],
-    //   ['', ''],
-    //   ['', ''],
-];
-
-// END OF USER DEFINITIONS
-// ----------------------------------------------------
 
 let actionMap = new Map(actionArray);
 let inboxDrafts = inboxWorkspace.query("inbox"); // see ref https://scripting.getdrafts.com/classes/workspace#query
