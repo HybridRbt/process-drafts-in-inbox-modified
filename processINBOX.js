@@ -1,11 +1,35 @@
 // created by @FlohGro
+// modified by @HybridRbt
 
 // process drafts from INBOX
+
+// select from a list of workspace
+// code from https://actions.getdrafts.com/a/1SG
+let workspaces = Workspace.getAll();
+if (workspaces.length == 0) {
+    alert("No workspaces defined.");
+    context.cancel();
+}
+
+let p = Prompt.create();
+p.title = "Select Workspace";
+p.message = "Choose workspace to process:";
+
+let ix = 0;
+for (let ws of workspaces) {
+    p.addButton(ws.name, ix);
+    ix++;
+}
+
+if (!p.show()) {
+    context.cancel();
+}
+
+let selectedIndex = p.buttonPressed;
+let ws = workspaces[selectedIndex];
+
 // ----------------------------------------------------
 // START OF USER DEFINITIONS
-
-// define the name of your inbox workspace
-let inboxWorkspaceName = "INBOX";
 
 // declare "display names" (for the prompt) and "action names" (from your Actions) in an array:
 // the last pair does not need a "," after the [] brackets!s
