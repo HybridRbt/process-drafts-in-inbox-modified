@@ -40,7 +40,7 @@ let actionArray = [
     ['☑️ Send to todoist', 'Todoist Quick Add V3 - With Notes, Reminders, and default project'],
     ['💎 记录发到 obsidian', '→ Obsidian file dnp'],
     ['⚡️ 想法发到 flomo', 'Send to flomo'],
-    ['🗑 trash', 'trash']
+    ['🗑 删除', 'trash']
     //   ['', ''],
     //   ['', ''],
     //   ['', ''],
