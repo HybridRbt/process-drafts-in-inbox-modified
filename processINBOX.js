@@ -34,16 +34,16 @@ let ws = workspaces[selectedIndex];
 // declare "display names" (for the prompt) and "action names" (from your Actions) in an array:
 // the last pair does not need a "," after the [] brackets!s
 let actionArray = [
-  ['skip', ''],
-  ['✅ Todoist inbox lines', 'INBOX line’s'],
-  ['🔗 Todoist URL Task', 'Draft URL Task'],
-  ['🗂 Bookmark to DEVONthink', 'bookmark to DEVONthink'],
-  ['⌨️ Markdown to DEVONthink', 'Markdown to DEVONthink CB'],
-  ['🏷 add tags from category', 'add tag from category'],
-  ['🗑 trash', 'trash']
-  //   ['', ''],
-  //   ['', ''],
-  //   ['', ''],
+    ['skip', ''],
+    ['✅ 单个任务发到滴答', 'Task in TickTick (Content)'],
+    ['❇️ 多个任务发到滴答', 'Task in TickTick (Multi)'],
+    ['☑️ Send to todoist', 'Todoist Quick Add V3 - With Notes, Reminders, and default project'],
+    ['💎 记录发到 obsidian', '→ Obsidian file dnp'],
+    ['⚡️ 想法发到 flomo', 'Send to flomo'],
+    ['🗑 trash', 'trash']
+    //   ['', ''],
+    //   ['', ''],
+    //   ['', ''],
 ];
 
 // END OF USER DEFINITIONS
