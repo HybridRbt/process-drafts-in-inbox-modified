@@ -26,7 +26,7 @@ if (!p.show()) {
 }
 
 let selectedIndex = p.buttonPressed;
-let ws = workspaces[selectedIndex];
+let inboxWorkspace = workspaces[selectedIndex];
 
 // ----------------------------------------------------
 // START OF USER DEFINITIONS
@@ -50,7 +50,6 @@ let actionArray = [
 // ----------------------------------------------------
 
 let actionMap = new Map(actionArray);
-let inboxWorkspace = Workspace.find(ws);
 let inboxDrafts = inboxWorkspace.query("inbox"); // see ref https://scripting.getdrafts.com/classes/workspace#query
 
 // loop through every draft (show title and prompt for action on it)
