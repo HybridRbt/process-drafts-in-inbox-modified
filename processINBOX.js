@@ -50,8 +50,7 @@ let actionArray = [
 // ----------------------------------------------------
 
 let actionMap = new Map(actionArray);
-// - get drafts from INBOX Workspace
-let inboxWorkspace = Workspace.find(inboxWorkspaceName);
+let inboxWorkspace = Workspace.find(ws);
 let inboxDrafts = inboxWorkspace.query("inbox"); // see ref https://scripting.getdrafts.com/classes/workspace#query
 
 // loop through every draft (show title and prompt for action on it)
