@@ -1,6 +1,30 @@
 // created by @FlohGro
 
 // process drafts from INBOX
+
+// select from a list of workspace
+// code from https://actions.getdrafts.com/a/1SG
+let f = () => {
+    let workspaces = Workspace.getAll();
+    if (workspaces.length == 0) {
+        alert("No workspaces defined.");
+        return false;
+    }
+
+    let p = Prompt.create();
+    p.title = "Select Workspace";
+    p.message = "Choose workspace to process:";
+
+    let ix = 0;
+    for (let ws of workspaces) {
+        p.addButton(ws.name, ix);
+        ix++;
+    }
+
+    if (!p.show()) {
+        return false;
+    }
+
 // ----------------------------------------------------
 // START OF USER DEFINITIONS
 
