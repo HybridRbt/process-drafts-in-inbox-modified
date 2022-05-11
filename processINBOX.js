@@ -1,4 +1,5 @@
 // created by @FlohGro
+// modified by @HybridRbt
 
 // process drafts from INBOX
 
@@ -25,57 +26,58 @@ let f = () => {
         return false;
     }
 
-// ----------------------------------------------------
-// START OF USER DEFINITIONS
+    // ----------------------------------------------------
+    // START OF USER DEFINITIONS
 
-// define the name of your inbox workspace
-let inboxWorkspaceName = "INBOX";
+    // declare "display names" (for the prompt) and "action names" (from your Actions) in an array:
+    // the last pair does not need a "," after the [] brackets!s
+    let actionArray = [
+        ['skip', ''],
+        ['✅ 单个任务发到滴答', 'Task in TickTick (Content)'],
+        ['❇️ 多个任务发到滴答', 'Task in TickTick (Multi)'],
+        ['☑️ Send to todoist', 'Todoist Quick Add V3'],
+        ['💎 记录发到 obsidian', '→ Obsidian file dnp'],
+        ['⚡️ 想法发到 flomo', 'Send to flomo'],
+        ['🗑 删除', 'Trash']
+        //   ['', ''],
+        //   ['', ''],
+        //   ['', ''],
+    ];
 
-// declare "display names" (for the prompt) and "action names" (from your Actions) in an array:
-// the last pair does not need a "," after the [] brackets!s
-let actionArray = [
-  ['skip', ''],
-  ['✅ Todoist inbox lines', 'INBOX line’s'],
-  ['🔗 Todoist URL Task', 'Draft URL Task'],
-  ['🗂 Bookmark to DEVONthink', 'bookmark to DEVONthink'],
-  ['⌨️ Markdown to DEVONthink', 'Markdown to DEVONthink CB'],
-  ['🏷 add tags from category', 'add tag from category'],
-  ['🗑 trash', 'trash']
-  //   ['', ''],
-  //   ['', ''],
-  //   ['', ''],
-];
+    // END OF USER DEFINITIONS
+    // ----------------------------------------------------
+    let selectedIndex = p.buttonPressed;
+    let inboxWorkspace = workspaces[selectedIndex];
 
-// END OF USER DEFINITIONS
-// ----------------------------------------------------
+    let actionMap = new Map(actionArray);
+    let inboxDrafts = inboxWorkspace.query("inbox"); // see ref https://scripting.getdrafts.com/classes/workspace#query
 
-let actionMap = new Map(actionArray);
-// - get drafts from INBOX Workspace
-let inboxWorkspace = Workspace.find(inboxWorkspaceName);
-let inboxDrafts = inboxWorkspace.query("all");
+    // loop through every draft (show title and prompt for action on it)
 
-// loop through every draft (show title and prompt for action on it)
+    for (inboxDraft of inboxDrafts) {
+        let actionPrompt = new Prompt();
+        actionPrompt.title = "process draft"
+        actionPrompt.message = "draft: " + inboxDraft.displayTitle;
 
-for (inboxDraft of inboxDrafts) {
-  let actionPrompt = new Prompt();
-  actionPrompt.title = "process draft"
-  actionPrompt.message = "draft: " + inboxDraft.displayTitle;
+        // add button for all elements in the actionMap
 
-  // add button for all elements in the actionMap
+        actionMap.forEach(function (value, key) {
+            actionPrompt.addButton(key, value);
+        })
+        actionPrompt.isCancellable = false;
+        actionPrompt.show();
 
-  actionMap.forEach(function(value, key) {
-    actionPrompt.addButton(key, value);
-  })
-  actionPrompt.isCancellable = false;
-  actionPrompt.show();
+        let selectedAction = actionPrompt.buttonPressed;
 
-  let selectedAction = actionPrompt.buttonPressed;
+        if (selectedAction == '') {
+            // no action for the given name
+        } else {
+            let action = Action.find(selectedAction);
+            app.queueAction(action, inboxDraft);
+        }
+    }
+}
 
-  if (selectedAction == '') {
-    // no action for the given name
-  } else {
-    let action = Action.find(selectedAction);
-    app.queueAction(action, inboxDraft);
-  }
-
+if (!f()) {
+    context.cancel();
 }
