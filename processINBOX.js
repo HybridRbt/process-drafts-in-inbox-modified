@@ -33,11 +33,10 @@ let f = () => {
     // the last pair does not need a "," after the [] brackets!s
     let actionArray = [
         ['skip', ''],
-        ['✅ 单个任务发到滴答', 'Task in TickTick (Content)'],
-        ['❇️ 多个任务发到滴答', 'Task in TickTick (Multi)'],
+        ['✅ 发到 Things inbox', 'Things Inbox'],
+        ['❇️ 多个任务发到 Things', 'Bunch of todos'],
         ['☑️ Send to todoist', 'Todoist Quick Add V3'],
-        ['💎 记录发到 obsidian', '→ Obsidian file dnp'],
-        ['⚡️ 想法发到 flomo', 'Send to flomo'],
+        ['💎 记录发到 Day One', 'To Day One'],
         ['🗑 删除', 'Trash']
         //   ['', ''],
         //   ['', ''],
